@@ -1,53 +1,53 @@
-"use strict";
-const path = require("path");
-const webpack = require("webpack");
+'use strict'
+const path = require('path')
+const webpack = require('webpack')
 
 module.exports = {
-  mode: "development",
+  mode: 'development',
   context: __dirname,
-  entry: "./test/dev-hook.jsx",
+  entry: './test/dev-hook.jsx',
   output: {
-    path: "/",
-    filename: "bundle.js",
-    sourceMapFilename: "[file].map",
-    publicPath: "/"
+    path: '/',
+    filename: 'bundle.js',
+    sourceMapFilename: '[file].map',
+    publicPath: '/'
   },
   module: {
     rules: [
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
-        loader: "babel-loader",
+        loader: 'babel-loader',
         options: {
           cacheDirectory: true,
-          plugins: [["react-hot-loader/babel"]]
+          plugins: [['react-hot-loader/babel']]
         }
       }
     ]
   },
   plugins: [
     new webpack.DefinePlugin({
-      "process.env": {
-        NODE_ENV: JSON.stringify("development")
+      'process.env': {
+        NODE_ENV: JSON.stringify('development')
       }
     })
   ],
-  devtool: "eval",
+  devtool: 'eval',
   devServer: {
     compress: true,
     port: 4002,
-    open: "index-dev.html",
+    open: 'index-dev.html',
     client: {
       overlay: true
     },
     static: {
-      directory: "."
+      directory: '.'
     }
   },
   resolve: {
-    extensions: [".webpack.js", ".web.js", ".js", ".jsx"],
+    extensions: ['.webpack.js', '.web.js', '.js', '.jsx'],
     alias: {
-      "react-grid-layout": path.join(__dirname, "/index-dev.js")
+      'react-grid-layout': path.join(__dirname, '/index-dev.js')
     }
   }
-};
+}

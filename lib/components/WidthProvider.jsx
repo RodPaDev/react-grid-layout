@@ -1,23 +1,23 @@
 // @flow
-import * as React from "react";
-import PropTypes from "prop-types";
-import clsx from "clsx";
-import type { ReactRef } from "../ReactGridLayoutPropTypes";
+import * as React from 'react'
+import PropTypes from 'prop-types'
+import clsx from 'clsx'
+import type { ReactRef } from '../ReactGridLayoutPropTypes'
 
 type WPDefaultProps = {|
   measureBeforeMount: boolean
-|};
+|}
 
 // eslint-disable-next-line no-unused-vars
 type WPProps = {|
   className?: string,
   style?: Object,
   ...WPDefaultProps
-|};
+|}
 
 type WPState = {|
   width: number
-|};
+|}
 
 type ComposedProps<Config> = {|
   ...Config,
@@ -25,9 +25,9 @@ type ComposedProps<Config> = {|
   className?: string,
   style?: Object,
   width?: number
-|};
+|}
 
-const layoutClassName = "react-grid-layout";
+const layoutClassName = 'react-grid-layout'
 
 /*
  * A simple HOC that provides facility for listening to container resizes.
@@ -44,47 +44,47 @@ export default function WidthProvideRGL<Config>(
   > {
     static defaultProps: WPDefaultProps = {
       measureBeforeMount: false
-    };
+    }
 
     static propTypes = {
       // If true, will not render children until mounted. Useful for getting the exact width before
       // rendering, to prevent any unsightly resizing.
       measureBeforeMount: PropTypes.bool
-    };
+    }
 
     state: WPState = {
       width: 1280
-    };
+    }
 
-    elementRef: ReactRef<HTMLDivElement> = React.createRef();
-    mounted: boolean = false;
+    elementRef: ReactRef<HTMLDivElement> = React.createRef()
+    mounted: boolean = false
 
     componentDidMount() {
-      this.mounted = true;
-      window.addEventListener("resize", this.onWindowResize);
+      this.mounted = true
+      window.addEventListener('resize', this.onWindowResize)
       // Call to properly set the breakpoint and resize the elements.
       // Note that if you're doing a full-width element, this can get a little wonky if a scrollbar
       // appears because of the grid. In that case, fire your own resize event, or set `overflow: scroll` on your body.
-      this.onWindowResize();
+      this.onWindowResize()
     }
 
     componentWillUnmount() {
-      this.mounted = false;
-      window.removeEventListener("resize", this.onWindowResize);
+      this.mounted = false
+      window.removeEventListener('resize', this.onWindowResize)
     }
 
     onWindowResize = () => {
-      if (!this.mounted) return;
-      const node = this.elementRef.current; // Flow casts this to Text | Element
+      if (!this.mounted) return
+      const node = this.elementRef.current // Flow casts this to Text | Element
       // fix: grid position error when node or parentNode display is none by window resize
       // #924 #1084
       if (node instanceof HTMLElement && node.offsetWidth) {
-        this.setState({ width: node.offsetWidth });
+        this.setState({ width: node.offsetWidth })
       }
-    };
+    }
 
     render() {
-      const { measureBeforeMount, ...rest } = this.props;
+      const { measureBeforeMount, ...rest } = this.props
       if (measureBeforeMount && !this.mounted) {
         return (
           <div
@@ -93,7 +93,7 @@ export default function WidthProvideRGL<Config>(
             // $FlowIgnore ref types
             ref={this.elementRef}
           />
-        );
+        )
       }
 
       return (
@@ -102,7 +102,7 @@ export default function WidthProvideRGL<Config>(
           {...rest}
           {...this.state}
         />
-      );
+      )
     }
-  };
+  }
 }

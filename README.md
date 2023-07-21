@@ -130,16 +130,16 @@ produce a grid with three items where:
 - users will be able to freely drag and resize item `c`
 
 ```js
-import GridLayout from "react-grid-layout";
+import GridLayout from 'react-grid-layout'
 
 class MyFirstGrid extends React.Component {
   render() {
     // layout is an array of objects, see the demo for more complete usage
     const layout = [
-      { i: "a", x: 0, y: 0, w: 1, h: 2, static: true },
-      { i: "b", x: 1, y: 0, w: 3, h: 2, minW: 2, maxW: 4 },
-      { i: "c", x: 4, y: 0, w: 1, h: 2 }
-    ];
+      { i: 'a', x: 0, y: 0, w: 1, h: 2, static: true },
+      { i: 'b', x: 1, y: 0, w: 3, h: 2, minW: 2, maxW: 4 },
+      { i: 'c', x: 4, y: 0, w: 1, h: 2 }
+    ]
     return (
       <GridLayout
         className="layout"
@@ -152,7 +152,7 @@ class MyFirstGrid extends React.Component {
         <div key="b">b</div>
         <div key="c">c</div>
       </GridLayout>
-    );
+    )
   }
 }
 ```
@@ -160,7 +160,7 @@ class MyFirstGrid extends React.Component {
 You may also choose to set layout properties directly on the children:
 
 ```js
-import GridLayout from "react-grid-layout";
+import GridLayout from 'react-grid-layout'
 
 class MyFirstGrid extends React.Component {
   render() {
@@ -176,7 +176,7 @@ class MyFirstGrid extends React.Component {
           c
         </div>
       </GridLayout>
-    );
+    )
   }
 }
 ```
@@ -191,12 +191,12 @@ excludes `React`, so it must be otherwise available in your application, either 
 To make RGL responsive, use the `<ResponsiveReactGridLayout>` element:
 
 ```js
-import { Responsive as ResponsiveGridLayout } from "react-grid-layout";
+import { Responsive as ResponsiveGridLayout } from 'react-grid-layout'
 
 class MyResponsiveGrid extends React.Component {
   render() {
     // {lg: layout1, md: layout2, ...}
-    const layouts = getLayoutsFromSomewhere();
+    const layouts = getLayoutsFromSomewhere()
     return (
       <ResponsiveGridLayout
         className="layout"
@@ -208,7 +208,7 @@ class MyResponsiveGrid extends React.Component {
         <div key="2">2</div>
         <div key="3">3</div>
       </ResponsiveGridLayout>
-    );
+    )
   }
 }
 ```
@@ -231,14 +231,14 @@ positions on drag events. In simple cases a HOC `WidthProvider` can be used to a
 width upon initialization and window resize events.
 
 ```js
-import { Responsive, WidthProvider } from "react-grid-layout";
+import { Responsive, WidthProvider } from 'react-grid-layout'
 
-const ResponsiveGridLayout = WidthProvider(Responsive);
+const ResponsiveGridLayout = WidthProvider(Responsive)
 
 class MyResponsiveGrid extends React.Component {
   render() {
     // {lg: layout1, md: layout2, ...}
-    var layouts = getLayoutsFromSomewhere();
+    var layouts = getLayoutsFromSomewhere()
     return (
       <ResponsiveGridLayout
         className="layout"
@@ -250,7 +250,7 @@ class MyResponsiveGrid extends React.Component {
         <div key="2">2</div>
         <div key="3">3</div>
       </ResponsiveGridLayout>
-    );
+    )
   }
 }
 ```
@@ -553,10 +553,10 @@ If you memoize your children, you can take advantage of this, and reap faster re
 function MyGrid(props) {
   const children = React.useMemo(() => {
     return new Array(props.count).fill(undefined).map((val, idx) => {
-      return <div key={idx} data-grid={{ x: idx, y: 1, w: 1, h: 1 }} />;
-    });
-  }, [props.count]);
-  return <ReactGridLayout cols={12}>{children}</ReactGridLayout>;
+      return <div key={idx} data-grid={{ x: idx, y: 1, w: 1, h: 1 }} />
+    })
+  }, [props.count])
+  return <ReactGridLayout cols={12}>{children}</ReactGridLayout>
 }
 ```
 
@@ -568,7 +568,7 @@ Using hooks to save your layout state on change will cause the layouts to re-ren
 To avoid this you should wrap your WidthProvider in a useMemo:
 
 ```js
-const ResponsiveReactGridLayout = useMemo(() => WidthProvider(Responsive), []);
+const ResponsiveReactGridLayout = useMemo(() => WidthProvider(Responsive), [])
 ```
 
 ### Custom Child Components and Draggable Handles

@@ -1,4 +1,4 @@
-name: "🐛 Bug report"
+name: '🐛 Bug report'
 description: Create a report to help us improve
 body:
   - type: markdown
@@ -80,12 +80,12 @@ body:
       label: Browser
       description: Select the browsers where the issue can be reproduced (that you know of).
       options:
-        - "Chrome"
-        - "Firefox"
-        - "Safari"
-        - "Edge"
-        - "Opera"
-        - "Other (add additonal context)"
+        - 'Chrome'
+        - 'Firefox'
+        - 'Safari'
+        - 'Edge'
+        - 'Opera'
+        - 'Other (add additonal context)'
     validations:
       required: true
   - type: textarea

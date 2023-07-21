@@ -6,7 +6,7 @@ declare module 'clsx' {
     | number
     | boolean
     | void
-    | null;
+    | null
 
-  declare module.exports: (...classes: Array<Classes>) => string;
+  declare module.exports: (...classes: Array<Classes>) => string
 }

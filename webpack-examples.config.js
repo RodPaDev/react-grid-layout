@@ -1,35 +1,35 @@
-"use strict";
-const webpack = require("webpack");
-const fs = require("fs");
+'use strict'
+const webpack = require('webpack')
+const fs = require('fs')
 
 // Builds example bundles
 module.exports = {
-  mode: "development",
+  mode: 'development',
   context: __dirname,
   entry: {},
   optimization: {
     splitChunks: {
       cacheGroups: {
         commons: {
-          name: "commons",
-          chunks: "all",
+          name: 'commons',
+          chunks: 'all',
           minChunks: 1
         }
       }
     }
   },
   output: {
-    path: __dirname + "/examples",
-    filename: "[name].js",
-    sourceMapFilename: "[file].map",
-    publicPath: "auto"
+    path: __dirname + '/examples',
+    filename: '[name].js',
+    sourceMapFilename: '[file].map',
+    publicPath: 'auto'
   },
   module: {
     rules: [
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
-        loader: "babel-loader",
+        loader: 'babel-loader',
         options: {
           cacheDirectory: true
         }
@@ -38,33 +38,33 @@ module.exports = {
   },
   plugins: [
     new webpack.DefinePlugin({
-      "process.env.STATIC_EXAMPLES": JSON.stringify(true)
+      'process.env.STATIC_EXAMPLES': JSON.stringify(true)
     })
   ],
   devServer: {
     compress: true,
     port: 4002,
-    open: "/react-grid-layout/examples/0-showcase.html",
+    open: '/react-grid-layout/examples/0-showcase.html',
     client: {
       overlay: true
     },
     static: {
-      directory: ".",
-      publicPath: "/react-grid-layout"
+      directory: '.',
+      publicPath: '/react-grid-layout'
     }
   },
   resolve: {
-    extensions: [".js", ".jsx"],
-    alias: { "react-grid-layout": __dirname + "/index-dev.js" }
+    extensions: ['.js', '.jsx'],
+    alias: { 'react-grid-layout': __dirname + '/index-dev.js' }
   }
-};
+}
 
 // Load all entry points
 const files = fs
-  .readdirSync(__dirname + "/test/examples")
-  .filter(element => element.match(/^.+\.jsx$/));
+  .readdirSync(__dirname + '/test/examples')
+  .filter(element => element.match(/^.+\.jsx$/))
 
 for (const file of files) {
-  const module_name = file.replace(/\.jsx$/, "");
-  module.exports.entry[module_name] = "./test/examples/" + file;
+  const module_name = file.replace(/\.jsx$/, '')
+  module.exports.entry[module_name] = './test/examples/' + file
 }
